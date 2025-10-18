@@ -24,8 +24,26 @@ const {
  *     responses:
  *       200:
  *         description: Список специализаций успешно получен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Specialization'
  *       500:
  *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getAllSpecializations);
 
@@ -45,8 +63,22 @@ router.get('/', getAllSpecializations);
  *     responses:
  *       200:
  *         description: Специализация найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Specialization'
  *       404:
  *         description: Специализация не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/:id', getSpecializationById);
 
@@ -72,8 +104,22 @@ router.get('/:id', getSpecializationById);
  *     responses:
  *       201:
  *         description: Специализация успешно создана
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Specialization'
  *       400:
  *         description: Неверные данные
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/', createSpecialization);
 
@@ -104,8 +150,22 @@ router.post('/', createSpecialization);
  *     responses:
  *       200:
  *         description: Специализация обновлена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Specialization'
  *       404:
  *         description: Специализация не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put('/:id', updateSpecialization);
 
@@ -125,10 +185,26 @@ router.put('/:id', updateSpecialization);
  *     responses:
  *       200:
  *         description: Специализация удалена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Specialization deleted
+ *                 data:
+ *                   $ref: '#/components/schemas/Specialization'
  *       404:
  *         description: Специализация не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete('/:id', deleteSpecialization);
 
 module.exports = router;
-

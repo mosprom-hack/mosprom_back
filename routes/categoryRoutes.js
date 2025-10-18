@@ -24,8 +24,26 @@ const {
  *     responses:
  *       200:
  *         description: Список категорий успешно получен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Category'
  *       500:
  *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getAllCategories);
 
@@ -45,8 +63,22 @@ router.get('/', getAllCategories);
  *     responses:
  *       200:
  *         description: Категория найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Category'
  *       404:
  *         description: Категория не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/:id', getCategoryById);
 
@@ -70,8 +102,22 @@ router.get('/:id', getCategoryById);
  *     responses:
  *       201:
  *         description: Категория успешно создана
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Category'
  *       400:
  *         description: Неверные данные
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/', createCategory);
 
@@ -100,8 +146,22 @@ router.post('/', createCategory);
  *     responses:
  *       200:
  *         description: Категория обновлена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Category'
  *       404:
  *         description: Категория не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put('/:id', updateCategory);
 
@@ -121,8 +181,25 @@ router.put('/:id', updateCategory);
  *     responses:
  *       200:
  *         description: Категория удалена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Category deleted
+ *                 data:
+ *                   $ref: '#/components/schemas/Category'
  *       404:
  *         description: Категория не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete('/:id', deleteCategory);
 

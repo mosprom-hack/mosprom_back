@@ -24,8 +24,26 @@ const {
  *     responses:
  *       200:
  *         description: Список проектов успешно получен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/UserProject'
  *       500:
  *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getAllUserProjects);
 
@@ -45,8 +63,22 @@ router.get('/', getAllUserProjects);
  *     responses:
  *       200:
  *         description: Проект найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/UserProject'
  *       404:
  *         description: Проект не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/:id', getUserProjectById);
 
@@ -78,8 +110,22 @@ router.get('/:id', getUserProjectById);
  *     responses:
  *       201:
  *         description: Проект успешно создан
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/UserProject'
  *       400:
  *         description: Неверные данные
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/', createUserProject);
 
@@ -112,8 +158,22 @@ router.post('/', createUserProject);
  *     responses:
  *       200:
  *         description: Проект обновлен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/UserProject'
  *       404:
  *         description: Проект не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put('/:id', updateUserProject);
 
@@ -133,10 +193,26 @@ router.put('/:id', updateUserProject);
  *     responses:
  *       200:
  *         description: Проект удален
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: User project deleted
+ *                 data:
+ *                   $ref: '#/components/schemas/UserProject'
  *       404:
  *         description: Проект не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete('/:id', deleteUserProject);
 
 module.exports = router;
-

@@ -24,8 +24,26 @@ const {
  *     responses:
  *       200:
  *         description: Список образований успешно получен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Education'
  *       500:
  *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getAllEducations);
 
@@ -45,8 +63,22 @@ router.get('/', getAllEducations);
  *     responses:
  *       200:
  *         description: Образование найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Education'
  *       404:
  *         description: Образование не найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/:id', getEducationById);
 
@@ -70,8 +102,22 @@ router.get('/:id', getEducationById);
  *     responses:
  *       201:
  *         description: Образование успешно создано
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Education'
  *       400:
  *         description: Неверные данные
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/', createEducation);
 
@@ -100,8 +146,22 @@ router.post('/', createEducation);
  *     responses:
  *       200:
  *         description: Образование обновлено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Education'
  *       404:
  *         description: Образование не найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put('/:id', updateEducation);
 
@@ -121,10 +181,26 @@ router.put('/:id', updateEducation);
  *     responses:
  *       200:
  *         description: Образование удалено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Education deleted
+ *                 data:
+ *                   $ref: '#/components/schemas/Education'
  *       404:
  *         description: Образование не найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete('/:id', deleteEducation);
 
 module.exports = router;
-

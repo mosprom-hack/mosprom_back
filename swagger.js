@@ -271,6 +271,165 @@ const options = {
             },
           },
         },
+        Category: {
+          type: 'object',
+          required: ['title'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID категории',
+            },
+            title: {
+              type: 'string',
+              description: 'Название категории',
+            },
+          },
+        },
+        Education: {
+          type: 'object',
+          required: ['title'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID образования',
+            },
+            title: {
+              type: 'string',
+              description: 'Название образования',
+            },
+          },
+        },
+        Skill: {
+          type: 'object',
+          required: ['title'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID навыка',
+            },
+            title: {
+              type: 'string',
+              description: 'Название навыка',
+            },
+          },
+        },
+        Role: {
+          type: 'object',
+          required: ['title'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID роли',
+            },
+            title: {
+              type: 'string',
+              description: 'Название роли',
+            },
+          },
+        },
+        Specialization: {
+          type: 'object',
+          required: ['title'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID специализации',
+            },
+            title: {
+              type: 'string',
+              description: 'Название специализации',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание специализации',
+            },
+          },
+        },
+        Company: {
+          type: 'object',
+          required: ['title'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID компании',
+            },
+            title: {
+              type: 'string',
+              description: 'Название компании',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание компании',
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата создания',
+            },
+          },
+        },
+        Community: {
+          type: 'object',
+          required: ['title', 'type'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID сообщества',
+            },
+            title: {
+              type: 'string',
+              description: 'Название сообщества',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание сообщества',
+            },
+            type: {
+              type: 'string',
+              description: 'Тип сообщества',
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата создания',
+            },
+          },
+        },
+        UserProject: {
+          type: 'object',
+          required: ['user_id', 'link'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID проекта',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID пользователя',
+            },
+            title: {
+              type: 'string',
+              description: 'Название проекта',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание проекта',
+            },
+            link: {
+              type: 'string',
+              description: 'Ссылка на проект',
+            },
+          },
+        },
       },
     },
   },

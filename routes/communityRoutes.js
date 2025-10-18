@@ -24,8 +24,26 @@ const {
  *     responses:
  *       200:
  *         description: Список сообществ успешно получен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Community'
  *       500:
  *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getAllCommunities);
 
@@ -45,8 +63,22 @@ router.get('/', getAllCommunities);
  *     responses:
  *       200:
  *         description: Сообщество найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Community'
  *       404:
  *         description: Сообщество не найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/:id', getCommunityById);
 
@@ -75,8 +107,22 @@ router.get('/:id', getCommunityById);
  *     responses:
  *       201:
  *         description: Сообщество успешно создано
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Community'
  *       400:
  *         description: Неверные данные
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/', createCommunity);
 
@@ -109,8 +155,22 @@ router.post('/', createCommunity);
  *     responses:
  *       200:
  *         description: Сообщество обновлено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Community'
  *       404:
  *         description: Сообщество не найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put('/:id', updateCommunity);
 
@@ -130,10 +190,26 @@ router.put('/:id', updateCommunity);
  *     responses:
  *       200:
  *         description: Сообщество удалено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Community deleted
+ *                 data:
+ *                   $ref: '#/components/schemas/Community'
  *       404:
  *         description: Сообщество не найдено
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete('/:id', deleteCommunity);
 
 module.exports = router;
-

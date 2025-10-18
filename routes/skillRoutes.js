@@ -24,8 +24,26 @@ const {
  *     responses:
  *       200:
  *         description: Список навыков успешно получен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Skill'
  *       500:
  *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getAllSkills);
 
@@ -45,8 +63,22 @@ router.get('/', getAllSkills);
  *     responses:
  *       200:
  *         description: Навык найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Skill'
  *       404:
  *         description: Навык не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/:id', getSkillById);
 
@@ -70,8 +102,22 @@ router.get('/:id', getSkillById);
  *     responses:
  *       201:
  *         description: Навык успешно создан
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Skill'
  *       400:
  *         description: Неверные данные
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/', createSkill);
 
@@ -100,8 +146,22 @@ router.post('/', createSkill);
  *     responses:
  *       200:
  *         description: Навык обновлен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Skill'
  *       404:
  *         description: Навык не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put('/:id', updateSkill);
 
@@ -121,10 +181,26 @@ router.put('/:id', updateSkill);
  *     responses:
  *       200:
  *         description: Навык удален
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Skill deleted
+ *                 data:
+ *                   $ref: '#/components/schemas/Skill'
  *       404:
  *         description: Навык не найден
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete('/:id', deleteSkill);
 
 module.exports = router;
-

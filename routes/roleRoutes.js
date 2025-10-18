@@ -24,8 +24,26 @@ const {
  *     responses:
  *       200:
  *         description: Список ролей успешно получен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Role'
  *       500:
  *         description: Ошибка сервера
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getAllRoles);
 
@@ -45,8 +63,22 @@ router.get('/', getAllRoles);
  *     responses:
  *       200:
  *         description: Роль найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Role'
  *       404:
  *         description: Роль не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/:id', getRoleById);
 
@@ -70,8 +102,22 @@ router.get('/:id', getRoleById);
  *     responses:
  *       201:
  *         description: Роль успешно создана
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Role'
  *       400:
  *         description: Неверные данные
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/', createRole);
 
@@ -100,8 +146,22 @@ router.post('/', createRole);
  *     responses:
  *       200:
  *         description: Роль обновлена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Role'
  *       404:
  *         description: Роль не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.put('/:id', updateRole);
 
@@ -121,10 +181,26 @@ router.put('/:id', updateRole);
  *     responses:
  *       200:
  *         description: Роль удалена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Role deleted
+ *                 data:
+ *                   $ref: '#/components/schemas/Role'
  *       404:
  *         description: Роль не найдена
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.delete('/:id', deleteRole);
 
 module.exports = router;
-
