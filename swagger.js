@@ -150,6 +150,127 @@ const options = {
             },
           },
         },
+        Mentor: {
+          type: 'object',
+          required: ['user_id', 'first_name', 'last_name'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID ментора',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID пользователя',
+            },
+            first_name: {
+              type: 'string',
+              description: 'Имя ментора',
+            },
+            last_name: {
+              type: 'string',
+              description: 'Фамилия ментора',
+            },
+            photo_url: {
+              type: 'string',
+              description: 'URL фото ментора',
+            },
+            position: {
+              type: 'string',
+              description: 'Должность ментора',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание ментора',
+            },
+            help: {
+              type: 'string',
+              description: 'Чем может помочь',
+            },
+            experience: {
+              type: 'string',
+              description: 'Опыт работы',
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата создания',
+            },
+          },
+        },
+        MentorInput: {
+          type: 'object',
+          required: ['user_id', 'first_name', 'last_name'],
+          properties: {
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID пользователя',
+            },
+            first_name: {
+              type: 'string',
+              description: 'Имя ментора',
+            },
+            last_name: {
+              type: 'string',
+              description: 'Фамилия ментора',
+            },
+            photo_url: {
+              type: 'string',
+              description: 'URL фото ментора',
+            },
+            position: {
+              type: 'string',
+              description: 'Должность ментора',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание ментора',
+            },
+            help: {
+              type: 'string',
+              description: 'Чем может помочь',
+            },
+            experience: {
+              type: 'string',
+              description: 'Опыт работы',
+            },
+          },
+        },
+        MentorUpdate: {
+          type: 'object',
+          properties: {
+            first_name: {
+              type: 'string',
+              description: 'Имя ментора',
+            },
+            last_name: {
+              type: 'string',
+              description: 'Фамилия ментора',
+            },
+            photo_url: {
+              type: 'string',
+              description: 'URL фото ментора',
+            },
+            position: {
+              type: 'string',
+              description: 'Должность ментора',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание ментора',
+            },
+            help: {
+              type: 'string',
+              description: 'Чем может помочь',
+            },
+            experience: {
+              type: 'string',
+              description: 'Опыт работы',
+            },
+          },
+        },
       },
     },
   },

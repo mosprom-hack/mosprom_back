@@ -1,0 +1,134 @@
+const express = require('express');
+const router = express.Router();
+const {
+  getAllSpecializations,
+  getSpecializationById,
+  createSpecialization,
+  updateSpecialization,
+  deleteSpecialization,
+} = require('../controllers/specializationController');
+
+/**
+ * @swagger
+ * tags:
+ *   name: Specializations
+ *   description: Управление специализациями
+ */
+
+/**
+ * @swagger
+ * /api/specializations:
+ *   get:
+ *     summary: Получить список всех специализаций
+ *     tags: [Specializations]
+ *     responses:
+ *       200:
+ *         description: Список специализаций успешно получен
+ *       500:
+ *         description: Ошибка сервера
+ */
+router.get('/', getAllSpecializations);
+
+/**
+ * @swagger
+ * /api/specializations/{id}:
+ *   get:
+ *     summary: Получить специализацию по ID
+ *     tags: [Specializations]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     responses:
+ *       200:
+ *         description: Специализация найдена
+ *       404:
+ *         description: Специализация не найдена
+ */
+router.get('/:id', getSpecializationById);
+
+/**
+ * @swagger
+ * /api/specializations:
+ *   post:
+ *     summary: Создать новую специализацию
+ *     tags: [Specializations]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Специализация успешно создана
+ *       400:
+ *         description: Неверные данные
+ */
+router.post('/', createSpecialization);
+
+/**
+ * @swagger
+ * /api/specializations/{id}:
+ *   put:
+ *     summary: Обновить специализацию
+ *     tags: [Specializations]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Специализация обновлена
+ *       404:
+ *         description: Специализация не найдена
+ */
+router.put('/:id', updateSpecialization);
+
+/**
+ * @swagger
+ * /api/specializations/{id}:
+ *   delete:
+ *     summary: Удалить специализацию
+ *     tags: [Specializations]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     responses:
+ *       200:
+ *         description: Специализация удалена
+ *       404:
+ *         description: Специализация не найдена
+ */
+router.delete('/:id', deleteSpecialization);
+
+module.exports = router;
+

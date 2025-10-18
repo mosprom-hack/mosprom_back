@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
     version: '1.0.0',
     endpoints: {
       users: '/api/users',
+      mentors: '/api/mentors',
       health: '/health',
       docs: '/api-docs'
     }
@@ -99,9 +100,11 @@ app.get('/health', async (req, res) => {
 
 // Подключение маршрутов
 const userRoutes = require('./routes/userRoutes');
+const mentorRoutes = require('./routes/mentorRoutes');
 //const categoryRoutes = require('./routes/categoryRoutes');
 
 app.use('/api/users', userRoutes);
+app.use('/api/mentors', mentorRoutes);
 //app.use('/api/categories', categoryRoutes);
 
 // TODO: Добавить остальные маршруты по мере создания контроллеров
