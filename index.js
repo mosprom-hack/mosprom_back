@@ -49,6 +49,14 @@ app.get('/', (req, res) => {
     endpoints: {
       users: '/api/users',
       mentors: '/api/mentors',
+      categories: '/api/categories',
+      educations: '/api/educations',
+      skills: '/api/skills',
+      roles: '/api/roles',
+      specializations: '/api/specializations',
+      companies: '/api/companies',
+      communities: '/api/communities',
+      userProjects: '/api/user-projects',
       health: '/health',
       docs: '/api-docs'
     }
@@ -101,18 +109,25 @@ app.get('/health', async (req, res) => {
 // Подключение маршрутов
 const userRoutes = require('./routes/userRoutes');
 const mentorRoutes = require('./routes/mentorRoutes');
-//const categoryRoutes = require('./routes/categoryRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const educationRoutes = require('./routes/educationRoutes');
+const skillRoutes = require('./routes/skillRoutes');
+const roleRoutes = require('./routes/roleRoutes');
+const specializationRoutes = require('./routes/specializationRoutes');
+const companyRoutes = require('./routes/companyRoutes');
+const communityRoutes = require('./routes/communityRoutes');
+const userProjectRoutes = require('./routes/userProjectRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/mentors', mentorRoutes);
-//app.use('/api/categories', categoryRoutes);
-
-// TODO: Добавить остальные маршруты по мере создания контроллеров
-// app.use('/api/educations', educationRoutes);
-// app.use('/api/skills', skillRoutes);
-// app.use('/api/communities', communityRoutes);
-// app.use('/api/roles', roleRoutes);
-// app.use('/api/projects', projectRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/educations', educationRoutes);
+app.use('/api/skills', skillRoutes);
+app.use('/api/roles', roleRoutes);
+app.use('/api/specializations', specializationRoutes);
+app.use('/api/companies', companyRoutes);
+app.use('/api/communities', communityRoutes);
+app.use('/api/user-projects', userProjectRoutes);
 
 // 404 handler
 app.use((req, res) => {
