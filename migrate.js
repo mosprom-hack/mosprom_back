@@ -68,6 +68,7 @@ async function migrate() {
         title text NOT NULL,
         description text,
         type text NOT NULL,
+        photo_url text,
         created_at timestamp with time zone NOT NULL DEFAULT now(),
         CONSTRAINT communities_pkey PRIMARY KEY (id)
     )
@@ -235,6 +236,49 @@ async function migrate() {
         CONSTRAINT events_community_id_fkey FOREIGN KEY (community_id) REFERENCES communities(id)
     )
     `);
+
+    await pool.query(`
+    CREATE TABLE IF NOT EXISTS posts (
+        id uuid NOT NULL DEFAULT gen_random_uuid(),
+        description text,
+        community_id uuid NOT NULL,
+        created_at timestamp with time zone NOT NULL DEFAULT now(),
+        CONSTRAINT posts_pkey PRIMARY KEY (id),
+        CONSTRAINT posts_community_id_fkey FOREIGN KEY (community_id) REFERENCES communities(id)
+    )
+    `);
+    
+    await pool.query(`
+    CREATE TABLE IF NOT EXISTS images (
+        id uuid NOT NULL DEFAULT gen_random_uuid(),
+        image_url text NOT NULL UNIQUE,
+        CONSTRAINT images_pkey PRIMARY KEY (id)
+    )
+    `);
+    
+    await pool.query(`
+    CREATE TABLE IF NOT EXISTS image_to_post (
+        id uuid NOT NULL DEFAULT gen_random_uuid(),
+        post_id uuid NOT NULL,
+        image_id uuid NOT NULL,
+        CONSTRAINT image_to_post_pkey PRIMARY KEY (id),
+        CONSTRAINT image_to_post_image_id_fkey FOREIGN KEY (image_id) REFERENCES images(id) ON DELETE CASCADE,
+        CONSTRAINT image_to_post_post_id_fkey FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+    )
+    `);
+
+    await pool.query(`
+        CREATE TABLE IF NOT EXISTS likes (
+          id uuid NOT NULL DEFAULT gen_random_uuid(),
+          post_id uuid NOT NULL,
+          user_id uuid NOT NULL,
+          created_at timestamp with time zone NOT NULL DEFAULT now(),
+          CONSTRAINT likes_pkey PRIMARY KEY (id),
+          CONSTRAINT likes_post_id_fkey FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+          CONSTRAINT likes_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+          CONSTRAINT likes_user_post_unique UNIQUE (user_id, post_id)
+        )
+      `);
 
     console.log('✅ Migrations completed successfully');
     process.exit(0);

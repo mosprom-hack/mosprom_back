@@ -93,17 +93,7 @@ router.get('/:id', getCommunityById);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - title
- *               - type
- *             properties:
- *               title:
- *                 type: string
- *               description:
- *                 type: string
- *               type:
- *                 type: string
+ *             $ref: '#/components/schemas/CommunityInput'
  *     responses:
  *       201:
  *         description: Сообщество успешно создано
@@ -144,14 +134,7 @@ router.post('/', createCommunity);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *               description:
- *                 type: string
- *               type:
- *                 type: string
+ *             $ref: '#/components/schemas/CommunityUpdate'
  *     responses:
  *       200:
  *         description: Сообщество обновлено

@@ -50,7 +50,7 @@ const getCommunityById = async (req, res) => {
 
 const createCommunity = async (req, res) => {
   try {
-    const { title, description, type } = req.body;
+    const { title, description, type, photo_url } = req.body;
     
     if (!title || !type) {
       return res.status(400).json({ 
@@ -60,8 +60,8 @@ const createCommunity = async (req, res) => {
     }
     
     const result = await pool.query(
-      'INSERT INTO communities (title, description, type) VALUES ($1, $2, $3) RETURNING *',
-      [title, description, type]
+      'INSERT INTO communities (title, description, type, photo_url) VALUES ($1, $2, $3, $4) RETURNING *',
+      [title, description, type, photo_url]
     );
     
     res.status(201).json({ 
@@ -81,15 +81,16 @@ const createCommunity = async (req, res) => {
 const updateCommunity = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, type } = req.body;
+    const { title, description, type, photo_url } = req.body;
     
     const result = await pool.query(
       `UPDATE communities SET 
         title = COALESCE($1, title),
         description = COALESCE($2, description),
-        type = COALESCE($3, type)
+        type = COALESCE($3, type),
+        photo_url = COALESCE($4, photo_url)
       WHERE id = $4 RETURNING *`,
-      [title, description, type, id]
+      [title, description, type, photo_url, id]
     );
     
     if (result.rows.length === 0) {

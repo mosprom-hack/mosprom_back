@@ -722,12 +722,68 @@ const options = {
             },
             type: {
               type: 'string',
+              enum: ['Интересы', 'Организация'],
               description: 'Тип сообщества',
+            },
+            photo_url: {
+              type: 'string',
+              description: 'URL фото сообщества',
+              nullable: true,
             },
             created_at: {
               type: 'string',
               format: 'date-time',
               description: 'Дата создания',
+            },
+          },
+        },
+        CommunityInput: {
+          type: 'object',
+          required: ['title', 'type'],
+          properties: {
+            title: {
+              type: 'string',
+              description: 'Название сообщества',
+              example: 'AI Community',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание сообщества',
+              example: 'Сообщество разработчиков AI',
+            },
+            type: {
+              type: 'string',
+              enum: ['Интересы', 'Организация'],
+              description: 'Тип сообщества',
+              example: 'Интересы',
+            },
+            photo_url: {
+              type: 'string',
+              description: 'URL фото сообщества',
+              example: 'https://example.com/community.jpg',
+            },
+          },
+        },
+        CommunityUpdate: {
+          type: 'object',
+          properties: {
+            title: {
+              type: 'string',
+              description: 'Название сообщества',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание сообщества',
+            },
+            type: {
+              type: 'string',
+              enum: ['Интересы', 'Организация'],
+              description: 'Тип сообщества',
+              example: 'Интересы',
+            },
+            photo_url: {
+              type: 'string',
+              description: 'URL фото сообщества',
             },
           },
         },
@@ -862,6 +918,201 @@ const options = {
               format: 'uuid',
             },
             mentor_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        Post: {
+          type: 'object',
+          required: ['community_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID поста',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание поста',
+              nullable: true,
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата создания',
+            },
+            community: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                  format: 'uuid',
+                  description: 'ID сообщества',
+                },
+                title: {
+                  type: 'string',
+                  description: 'Название сообщества',
+                },
+                photo_url: {
+                  type: 'string',
+                  description: 'URL фото сообщества',
+                  nullable: true,
+                },
+              },
+            },
+            images: {
+              type: 'array',
+              description: 'Прикрепленные изображения',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    format: 'uuid',
+                    description: 'ID изображения',
+                  },
+                  image_url: {
+                    type: 'string',
+                    description: 'URL изображения',
+                  },
+                },
+              },
+            },
+          },
+        },
+        PostWithImages: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            description: {
+              type: 'string',
+              nullable: true,
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+            },
+            community: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                  format: 'uuid',
+                },
+                title: {
+                  type: 'string',
+                },
+                photo_url: {
+                  type: 'string',
+                  nullable: true,
+                },
+              },
+            },
+            images: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    format: 'uuid',
+                  },
+                  image_url: {
+                    type: 'string',
+                  },
+                },
+              },
+            },
+          },
+        },
+        PostInput: {
+          type: 'object',
+          required: ['community_id'],
+          properties: {
+            description: {
+              type: 'string',
+              example: 'Описание поста',
+            },
+            community_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        PostUpdate: {
+          type: 'object',
+          properties: {
+            description: {
+              type: 'string',
+            },
+            community_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        Image: {
+          type: 'object',
+          required: ['image_url'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            image_url: {
+              type: 'string',
+            },
+          },
+        },
+        ImageInput: {
+          type: 'object',
+          required: ['image_url'],
+          properties: {
+            image_url: {
+              type: 'string',
+              example: 'https://example.com/image.jpg',
+            },
+          },
+        },
+        ImageUpdate: {
+          type: 'object',
+          properties: {
+            image_url: {
+              type: 'string',
+            },
+          },
+        },
+        ImageToPost: {
+          type: 'object',
+          required: ['post_id', 'image_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            post_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            image_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        ImageToPostInput: {
+          type: 'object',
+          required: ['post_id', 'image_id'],
+          properties: {
+            post_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            image_id: {
               type: 'string',
               format: 'uuid',
             },

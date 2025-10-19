@@ -3,11 +3,9 @@ const pool = require('./db'); // путь к твоему db.js
 const renameColumn = async () => {
   try {
     await pool.query(`
-        UPDATE users 
-        SET telegram = CONCAT('@', telegram) 
-        WHERE telegram NOT LIKE '@%'
+        ALTER TABLE communities ADD COLUMN photo_url text
       `);
-    console.log('✅ Telegram успешно добавлен!');
+    console.log('✅ Фотография успешно добавлена!');
     process.exit(0);
   } catch (error) {
     console.error('❌ Ошибка:', error.message);

@@ -135,7 +135,13 @@ const specializationToSkillRoutes = require('./routes/specializationToSkillRoute
 const roleToUserToCommunityRoutes = require('./routes/roleToUserToCommunityRoutes');
 const competenceToUserRoutes = require('./routes/competenceToUserRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const postRoutes = require('./routes/postRoutes');
+const imageRoutes = require('./routes/imageRoutes');
+const imageToPostRoutes = require('./routes/imageToPostRoutes');
 
+app.use('/api/posts', postRoutes);
+app.use('/api/images', imageRoutes);
+app.use('/api/image-to-post', imageToPostRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/competences-to-user', competenceToUserRoutes);
 app.use('/api/users', userRoutes);
