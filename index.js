@@ -134,7 +134,9 @@ const skillToMentorRoutes = require('./routes/skillToMentorRoutes');
 const specializationToSkillRoutes = require('./routes/specializationToSkillRoutes');
 const roleToUserToCommunityRoutes = require('./routes/roleToUserToCommunityRoutes');
 const competenceToUserRoutes = require('./routes/competenceToUserRoutes');
+const eventRoutes = require('./routes/eventRoutes');
 
+app.use('/api/events', eventRoutes);
 app.use('/api/competences-to-user', competenceToUserRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/mentors', mentorRoutes);

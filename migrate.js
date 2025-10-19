@@ -204,20 +204,37 @@ async function migrate() {
     `);
 
     await pool.query(`
-        CREATE TABLE IF NOT EXISTS competence_to_user (
-          id uuid NOT NULL DEFAULT gen_random_uuid(),
-          user_id uuid NOT NULL UNIQUE,
-          solve real NOT NULL CHECK (solve >= 0 AND solve <= 1),
-          programming real NOT NULL CHECK (programming >= 0 AND programming <= 1),
-          logic real NOT NULL CHECK (logic >= 0 AND logic <= 1),
-          technical real NOT NULL CHECK (technical >= 0 AND technical <= 1),
-          organizer real NOT NULL CHECK (organizer >= 0 AND organizer <= 1),
-          communication real NOT NULL CHECK (communication >= 0 AND communication <= 1),
-          created_at timestamp with time zone NOT NULL DEFAULT now(),
-          CONSTRAINT competence_to_user_pkey PRIMARY KEY (id),
-          CONSTRAINT competence_to_user_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-        )
-      `);
+    CREATE TABLE IF NOT EXISTS competence_to_user (
+        id uuid NOT NULL DEFAULT gen_random_uuid(),
+        user_id uuid NOT NULL UNIQUE,
+        solve real NOT NULL CHECK (solve >= 0 AND solve <= 1),
+        programming real NOT NULL CHECK (programming >= 0 AND programming <= 1),
+        logic real NOT NULL CHECK (logic >= 0 AND logic <= 1),
+        technical real NOT NULL CHECK (technical >= 0 AND technical <= 1),
+        organizer real NOT NULL CHECK (organizer >= 0 AND organizer <= 1),
+        communication real NOT NULL CHECK (communication >= 0 AND communication <= 1),
+        created_at timestamp with time zone NOT NULL DEFAULT now(),
+        CONSTRAINT competence_to_user_pkey PRIMARY KEY (id),
+        CONSTRAINT competence_to_user_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )
+    `);
+
+    await pool.query(`
+    CREATE TABLE IF NOT EXISTS events (
+        id uuid NOT NULL DEFAULT gen_random_uuid(),
+        title text NOT NULL,
+        description text,
+        topic text NOT NULL,
+        type text NOT NULL,
+        location text,
+        image_url text,
+        community_id uuid,
+        release timestamp with time zone NOT NULL,
+        created_at timestamp with time zone NOT NULL DEFAULT now(),
+        CONSTRAINT events_pkey PRIMARY KEY (id),
+        CONSTRAINT events_community_id_fkey FOREIGN KEY (community_id) REFERENCES communities(id)
+    )
+    `);
 
     console.log('✅ Migrations completed successfully');
     process.exit(0);

@@ -428,6 +428,146 @@ const options = {
             },
           },
         },
+        Event: {
+          type: 'object',
+          required: ['title', 'topic', 'type', 'release'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID мероприятия',
+            },
+            title: {
+              type: 'string',
+              description: 'Название мероприятия',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание мероприятия',
+              nullable: true,
+            },
+            topic: {
+              type: 'string',
+              description: 'Тема мероприятия',
+            },
+            type: {
+              type: 'string',
+              description: 'Тип мероприятия',
+            },
+            location: {
+              type: 'string',
+              description: 'Место проведения',
+              nullable: true,
+            },
+            image_url: {
+              type: 'string',
+              description: 'URL изображения',
+              nullable: true,
+            },
+            community_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID сообщества',
+              nullable: true,
+            },
+            release: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата и время проведения',
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата создания',
+            },
+          },
+        },
+        EventInput: {
+          type: 'object',
+          required: ['title', 'topic', 'type', 'release'],
+          properties: {
+            title: {
+              type: 'string',
+              description: 'Название мероприятия',
+              example: 'Хакатон по AI',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание мероприятия',
+              example: 'Соревнование по разработке AI-решений',
+            },
+            topic: {
+              type: 'string',
+              description: 'Тема мероприятия',
+              example: 'Искусственный интеллект',
+            },
+            type: {
+              type: 'string',
+              description: 'Тип мероприятия',
+              example: 'Оффлайн',
+            },
+            location: {
+              type: 'string',
+              description: 'Место проведения',
+              example: 'Москва, ул. Тверская, д. 1',
+            },
+            image_url: {
+              type: 'string',
+              description: 'URL изображения',
+              example: 'https://example.com/image.jpg',
+            },
+            community_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID сообщества',
+            },
+            release: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата и время проведения',
+              example: '2025-12-31T18:00:00Z',
+            },
+          },
+        },
+        EventUpdate: {
+          type: 'object',
+          properties: {
+            title: {
+              type: 'string',
+              description: 'Название мероприятия',
+            },
+            description: {
+              type: 'string',
+              description: 'Описание мероприятия',
+            },
+            topic: {
+              type: 'string',
+              description: 'Тема мероприятия',
+            },
+            type: {
+              type: 'string',
+              description: 'Тип мероприятия',
+            },
+            location: {
+              type: 'string',
+              description: 'Место проведения',
+            },
+            image_url: {
+              type: 'string',
+              description: 'URL изображения',
+            },
+            community_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID сообщества',
+            },
+            release: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата и время проведения',
+            },
+          },
+        },
         Category: {
           type: 'object',
           required: ['title'],
