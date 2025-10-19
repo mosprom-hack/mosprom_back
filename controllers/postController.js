@@ -17,14 +17,24 @@ const getAllPosts = async (req, res) => {
          ORDER BY p.created_at DESC`
       );
       
-      // Для каждого поста получаем изображения
+      // Для каждого поста получаем изображения и лайки
       const posts = await Promise.all(
         postsResult.rows.map(async (row) => {
+          // Получаем изображения
           const imagesResult = await pool.query(
             `SELECT i.id, i.image_url 
              FROM images i
              INNER JOIN image_to_post itp ON i.id = itp.image_id
              WHERE itp.post_id = $1`,
+            [row.id]
+          );
+          
+          // Получаем лайки
+          const likesResult = await pool.query(
+            `SELECT l.id, l.user_id, l.created_at 
+             FROM likes l
+             WHERE l.post_id = $1
+             ORDER BY l.created_at DESC`,
             [row.id]
           );
           
@@ -37,7 +47,8 @@ const getAllPosts = async (req, res) => {
               title: row.community_title,
               photo_url: row.community_photo_url
             },
-            images: imagesResult.rows
+            images: imagesResult.rows,
+            likes: likesResult.rows
           };
         })
       );
@@ -92,6 +103,15 @@ const getAllPosts = async (req, res) => {
         [id]
       );
       
+      // Получаем лайки
+      const likesResult = await pool.query(
+        `SELECT l.id, l.user_id, l.created_at 
+         FROM likes l
+         WHERE l.post_id = $1
+         ORDER BY l.created_at DESC`,
+        [id]
+      );
+      
       // Формируем ответ
       const row = postResult.rows[0];
       const post = {
@@ -103,7 +123,8 @@ const getAllPosts = async (req, res) => {
           title: row.community_title,
           photo_url: row.community_photo_url
         },
-        images: imagesResult.rows
+        images: imagesResult.rows,
+        likes: likesResult.rows
       };
       
       res.json({
@@ -119,7 +140,7 @@ const getAllPosts = async (req, res) => {
     }
   };
 
-const getPostsByCommunityId = async (req, res) => {
+  const getPostsByCommunityId = async (req, res) => {
     try {
       const { community_id } = req.params;
       
@@ -140,14 +161,24 @@ const getPostsByCommunityId = async (req, res) => {
         [community_id]
       );
       
-      // Для каждого поста получаем изображения
+      // Для каждого поста получаем изображения и лайки
       const posts = await Promise.all(
         postsResult.rows.map(async (row) => {
+          // Получаем изображения
           const imagesResult = await pool.query(
             `SELECT i.id, i.image_url 
              FROM images i
              INNER JOIN image_to_post itp ON i.id = itp.image_id
              WHERE itp.post_id = $1`,
+            [row.id]
+          );
+          
+          // Получаем лайки
+          const likesResult = await pool.query(
+            `SELECT l.id, l.user_id, l.created_at 
+             FROM likes l
+             WHERE l.post_id = $1
+             ORDER BY l.created_at DESC`,
             [row.id]
           );
           
@@ -160,7 +191,8 @@ const getPostsByCommunityId = async (req, res) => {
               title: row.community_title,
               photo_url: row.community_photo_url
             },
-            images: imagesResult.rows
+            images: imagesResult.rows,
+            likes: likesResult.rows
           };
         })
       );

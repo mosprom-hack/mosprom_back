@@ -138,7 +138,9 @@ const eventRoutes = require('./routes/eventRoutes');
 const postRoutes = require('./routes/postRoutes');
 const imageRoutes = require('./routes/imageRoutes');
 const imageToPostRoutes = require('./routes/imageToPostRoutes');
+const likeRoutes = require('./routes/likeRoutes');
 
+app.use('/api/likes', likeRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/images', imageRoutes);
 app.use('/api/image-to-post', imageToPostRoutes);

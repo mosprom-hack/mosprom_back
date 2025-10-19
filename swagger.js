@@ -979,6 +979,30 @@ const options = {
                 },
               },
             },
+            likes: {
+              type: 'array',
+              description: 'Лайки поста',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    format: 'uuid',
+                    description: 'ID лайка',
+                  },
+                  user_id: {
+                    type: 'string',
+                    format: 'uuid',
+                    description: 'ID пользователя',
+                  },
+                  created_at: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'Дата создания лайка',
+                  },
+                },
+              },
+            },
           },
         },
         PostWithImages: {
@@ -1023,6 +1047,26 @@ const options = {
                   },
                   image_url: {
                     type: 'string',
+                  },
+                },
+              },
+            },
+            likes: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    format: 'uuid',
+                  },
+                  user_id: {
+                    type: 'string',
+                    format: 'uuid',
+                  },
+                  created_at: {
+                    type: 'string',
+                    format: 'date-time',
                   },
                 },
               },
@@ -1133,6 +1177,48 @@ const options = {
             skill_id: {
               type: 'string',
               format: 'uuid',
+            },
+          },
+        },
+        Like: {
+          type: 'object',
+          required: ['post_id', 'user_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID лайка',
+            },
+            post_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID поста',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID пользователя',
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Дата создания',
+            },
+          },
+        },
+        LikeInput: {
+          type: 'object',
+          required: ['post_id', 'user_id'],
+          properties: {
+            post_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID поста',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID пользователя',
             },
           },
         },
