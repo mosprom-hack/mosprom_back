@@ -51,7 +51,7 @@ router.get('/', getAllSpecializations);
  * @swagger
  * /api/specializations/{id}:
  *   get:
- *     summary: Получить специализацию по ID
+ *     summary: Получить специализацию по ID со списком навыков
  *     tags: [Specializations]
  *     parameters:
  *       - in: path
@@ -72,7 +72,7 @@ router.get('/', getAllSpecializations);
  *                   type: boolean
  *                   example: true
  *                 data:
- *                   $ref: '#/components/schemas/Specialization'
+ *                   $ref: '#/components/schemas/SpecializationWithSkills'
  *       404:
  *         description: Специализация не найдена
  *         content:

@@ -3,7 +3,7 @@ const pool = require('../db');
 const getAllSpecializations = async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT * FROM specializations ORDER BY title'
+      'SELECT id, title FROM specializations ORDER BY title'
     );
     res.json({ 
       success: true, 
@@ -19,25 +19,70 @@ const getAllSpecializations = async (req, res) => {
   }
 };
 
+// const getSpecializationById = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+    
+//     const result = await pool.query(
+//       'SELECT * FROM specializations WHERE id = $1',
+//       [id]
+//     );
+    
+//     if (result.rows.length === 0) {
+//       return res.status(404).json({ 
+//         success: false, 
+//         error: 'Specialization not found' 
+//       });
+//     }
+    
+//     res.json({ 
+//       success: true, 
+//       data: result.rows[0] 
+//     });
+//   } catch (error) {
+//     console.error('Error fetching specialization:', error);
+//     res.status(500).json({ 
+//       success: false, 
+//       error: error.message 
+//     });
+//   }
+// };
+
 const getSpecializationById = async (req, res) => {
   try {
     const { id } = req.params;
     
-    const result = await pool.query(
+    // Получаем специализацию
+    const specializationResult = await pool.query(
       'SELECT * FROM specializations WHERE id = $1',
       [id]
     );
     
-    if (result.rows.length === 0) {
+    if (specializationResult.rows.length === 0) {
       return res.status(404).json({ 
         success: false, 
         error: 'Specialization not found' 
       });
     }
     
+    // Получаем связанные скиллы
+    const skillsResult = await pool.query(
+      `SELECT s.id, s.title 
+       FROM skills s
+       INNER JOIN specialization_to_skill sts ON s.id = sts.skill_id
+       WHERE sts.specialization_id = $1`,
+      [id]
+    );
+    
+    // Формируем ответ
+    const specialization = {
+      ...specializationResult.rows[0],
+      skills: skillsResult.rows
+    };
+    
     res.json({ 
       success: true, 
-      data: result.rows[0] 
+      data: specialization
     });
   } catch (error) {
     console.error('Error fetching specialization:', error);

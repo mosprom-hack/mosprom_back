@@ -57,6 +57,14 @@ app.get('/', (req, res) => {
       companies: '/api/companies',
       communities: '/api/communities',
       userProjects: '/api/user-projects',
+      categoryToUser: '/api/category-to-user',
+      educationToUser: '/api/education-to-user',
+      skillToUser: '/api/skill-to-user',
+      mentorToCompany: '/api/mentor-to-company',
+      mentorToSpecialization: '/api/mentor-to-specialization',
+      skillToMentor: '/api/skill-to-mentor',
+      specializationToSkill: '/api/specialization-to-skill',
+      roleToUserToCommunity: '/api/role-to-user-to-community',
       health: '/health',
       docs: '/api-docs'
     }
@@ -117,6 +125,14 @@ const specializationRoutes = require('./routes/specializationRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const communityRoutes = require('./routes/communityRoutes');
 const userProjectRoutes = require('./routes/userProjectRoutes');
+const categoryToUserRoutes = require('./routes/categoryToUserRoutes');
+const educationToUserRoutes = require('./routes/educationToUserRoutes');
+const skillToUserRoutes = require('./routes/skillToUserRoutes');
+const mentorToCompanyRoutes = require('./routes/mentorToCompanyRoutes');
+const mentorToSpecializationRoutes = require('./routes/mentorToSpecializationRoutes');
+const skillToMentorRoutes = require('./routes/skillToMentorRoutes');
+const specializationToSkillRoutes = require('./routes/specializationToSkillRoutes');
+const roleToUserToCommunityRoutes = require('./routes/roleToUserToCommunityRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/mentors', mentorRoutes);
@@ -128,6 +144,14 @@ app.use('/api/specializations', specializationRoutes);
 app.use('/api/companies', companyRoutes);
 app.use('/api/communities', communityRoutes);
 app.use('/api/user-projects', userProjectRoutes);
+app.use('/api/category-to-user', categoryToUserRoutes);
+app.use('/api/education-to-user', educationToUserRoutes);
+app.use('/api/skill-to-user', skillToUserRoutes);
+app.use('/api/mentor-to-company', mentorToCompanyRoutes);
+app.use('/api/mentor-to-specialization', mentorToSpecializationRoutes);
+app.use('/api/skill-to-mentor', skillToMentorRoutes);
+app.use('/api/specialization-to-skill', specializationToSkillRoutes);
+app.use('/api/role-to-user-to-community', roleToUserToCommunityRoutes);
 
 // 404 handler
 app.use((req, res) => {

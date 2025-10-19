@@ -3,7 +3,7 @@ const pool = require('../db');
 const getAllCompanies = async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT * FROM companies ORDER BY created_at DESC'
+      'SELECT id, title FROM companies ORDER BY created_at DESC'
     );
     res.json({ 
       success: true, 

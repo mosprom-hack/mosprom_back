@@ -344,9 +344,41 @@ const options = {
               type: 'string',
               description: 'Название специализации',
             },
+          },
+        },
+        SpecializationWithSkills: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+              description: 'ID специализации',
+            },
+            title: {
+              type: 'string',
+              description: 'Название специализации',
+            },
             description: {
               type: 'string',
               description: 'Описание специализации',
+            },
+            skills: {
+              type: 'array',
+              description: 'Список навыков специализации',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    format: 'uuid',
+                    description: 'ID навыка',
+                  },
+                  title: {
+                    type: 'string',
+                    description: 'Название навыка',
+                  },
+                },
+              },
             },
           },
         },
@@ -427,6 +459,161 @@ const options = {
             link: {
               type: 'string',
               description: 'Ссылка на проект',
+            },
+          },
+        },
+        CategoryToUser: {
+          type: 'object',
+          required: ['user_id', 'category_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            category_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        EducationToUser: {
+          type: 'object',
+          required: ['user_id', 'education_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            education_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        SkillToUser: {
+          type: 'object',
+          required: ['user_id', 'skill_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            skill_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        MentorToCompany: {
+          type: 'object',
+          required: ['mentor_id', 'company_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            mentor_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            company_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        MentorToSpecialization: {
+          type: 'object',
+          required: ['mentor_id', 'specialization_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            mentor_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            specialization_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        SkillToMentor: {
+          type: 'object',
+          required: ['skill_id', 'mentor_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            skill_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            mentor_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        SpecializationToSkill: {
+          type: 'object',
+          required: ['specialization_id', 'skill_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            specialization_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            skill_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+          },
+        },
+        RoleToUserToCommunity: {
+          type: 'object',
+          required: ['user_id', 'community_id', 'role_id'],
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            user_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            community_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            role_id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            description: {
+              type: 'string',
+            },
+            created_at: {
+              type: 'string',
+              format: 'date-time',
             },
           },
         },
