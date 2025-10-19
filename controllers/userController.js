@@ -40,54 +40,9 @@ const getUserById = async (req, res) => {
     
     const user = userResult.rows[0];
     
-    // // Получаем категории пользователя
-    // const categoriesResult = await pool.query(`
-    //   SELECT c.* FROM categories c
-    //   INNER JOIN category_to_user ctu ON c.id = ctu.category_id
-    //   WHERE ctu.user_id = $1
-    // `, [id]);
-    
-    // // Получаем образование пользователя
-    // const educationsResult = await pool.query(`
-    //   SELECT e.* FROM educations e
-    //   INNER JOIN education_to_user etu ON e.id = etu.education_id
-    //   WHERE etu.user_id = $1
-    // `, [id]);
-    
-    // // Получаем навыки пользователя
-    // const skillsResult = await pool.query(`
-    //   SELECT s.* FROM skills s
-    //   INNER JOIN skill_to_user stu ON s.id = stu.skill_id
-    //   WHERE stu.user_id = $1
-    // `, [id]);
-    
-    // // Получаем проекты пользователя
-    // const projectsResult = await pool.query(
-    //   'SELECT * FROM user_projects WHERE user_id = $1',
-    //   [id]
-    // );
-    
-    // // Получаем сообщества и роли пользователя
-    // const communitiesResult = await pool.query(`
-    //   SELECT 
-    //     c.*,
-    //     r.title as role_title,
-    //     rutc.description as role_description,
-    //     rutc.created_at as joined_at
-    //   FROM communities c
-    //   INNER JOIN role_to_user_to_community rutc ON c.id = rutc.community_id
-    //   INNER JOIN roles r ON rutc.role_id = r.id
-    //   WHERE rutc.user_id = $1
-    // `, [id]);
-    
     // Собираем полный профиль
     const fullProfile = {
       ...user,
-    //   categories: categoriesResult.rows,
-    //   educations: educationsResult.rows,
-    //   skills: skillsResult.rows,
-    //   projects: projectsResult.rows,
-    //   communities: communitiesResult.rows
     };
     
     res.json({ 
