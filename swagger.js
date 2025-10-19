@@ -18,15 +18,15 @@ const options = {
       schemas: {
         User: {
           type: 'object',
-          required: ['nickname', 'first_name', 'last_name'],
+          required: ['telegram', 'first_name', 'last_name'],
           properties: {
             id: {
               type: 'integer',
               description: 'ID пользователя',
             },
-            nickname: {
+            telegram: {
               type: 'string',
-              description: 'Никнейм пользователя',
+              description: 'Телеграм пользователя',
             },
             first_name: {
               type: 'string',
@@ -61,11 +61,11 @@ const options = {
         },
         UserInput: {
           type: 'object',
-          required: ['nickname', 'first_name', 'last_name'],
+          required: ['telegram', 'first_name', 'last_name'],
           properties: {
-            nickname: {
+            telegram: {
               type: 'string',
-              description: 'Никнейм пользователя',
+              description: 'Телеграм пользователя',
             },
             first_name: {
               type: 'string',
@@ -96,9 +96,9 @@ const options = {
         UserUpdate: {
           type: 'object',
           properties: {
-            nickname: {
+            telegram: {
               type: 'string',
-              description: 'Никнейм пользователя',
+              description: 'Телеграм пользователя',
             },
             first_name: {
               type: 'string',

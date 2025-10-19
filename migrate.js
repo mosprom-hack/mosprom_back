@@ -7,7 +7,7 @@ async function migrate() {
     await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
         id uuid NOT NULL DEFAULT gen_random_uuid(),
-        nickname text NOT NULL UNIQUE,
+        telegram text NOT NULL UNIQUE,
         first_name text NOT NULL,
         last_name text NOT NULL,
         phone text UNIQUE,
@@ -18,7 +18,7 @@ async function migrate() {
         CONSTRAINT users_pkey PRIMARY KEY (id)
     )
     `);
-    
+
     await pool.query(`
     CREATE TABLE IF NOT EXISTS categories (
         id uuid NOT NULL DEFAULT gen_random_uuid(),

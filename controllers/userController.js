@@ -61,19 +61,19 @@ const getUserById = async (req, res) => {
 // Создать пользователя
 const createUser = async (req, res) => {
   try {
-    const { nickname, first_name, last_name, phone, email, photo_url, description } = req.body;
+    const { telegram, first_name, last_name, phone, email, photo_url, description } = req.body;
     
-    if (!nickname || !first_name || !last_name) {
+    if (!telegram || !first_name || !last_name) {
       return res.status(400).json({ 
         success: false, 
-        error: 'Nickname, first_name and last_name are required' 
+        error: 'Telegram, first_name and last_name are required' 
       });
     }
     
     const result = await pool.query(
-      `INSERT INTO users (nickname, first_name, last_name, phone, email, photo_url, description) 
+      `INSERT INTO users (telegram, first_name, last_name, phone, email, photo_url, description) 
        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-      [nickname, first_name, last_name, phone, email, photo_url, description]
+      [telegram, first_name, last_name, phone, email, photo_url, description]
     );
     
     res.status(201).json({ 
@@ -86,7 +86,7 @@ const createUser = async (req, res) => {
     if (error.code === '23505') { // Unique violation
       return res.status(400).json({ 
         success: false, 
-        error: 'Nickname, phone or email already exists' 
+        error: 'Telegram, phone or email already exists' 
       });
     }
     
@@ -101,11 +101,11 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nickname, first_name, last_name, phone, email, photo_url, description } = req.body;
+    const { telegram, first_name, last_name, phone, email, photo_url, description } = req.body;
     
     const result = await pool.query(
       `UPDATE users SET 
-        nickname = COALESCE($1, nickname),
+        telegram = COALESCE($1, telegram),
         first_name = COALESCE($2, first_name),
         last_name = COALESCE($3, last_name),
         phone = COALESCE($4, phone),
@@ -113,7 +113,7 @@ const updateUser = async (req, res) => {
         photo_url = COALESCE($6, photo_url),
         description = COALESCE($7, description)
       WHERE id = $8 RETURNING *`,
-      [nickname, first_name, last_name, phone, email, photo_url, description, id]
+      [telegram, first_name, last_name, phone, email, photo_url, description, id]
     );
     
     if (result.rows.length === 0) {
@@ -166,72 +166,10 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// // Добавить категорию пользователю
-// const addCategoryToUser = async (req, res) => {
-//   try {
-//     const { userId, categoryId } = req.body;
-    
-//     if (!userId || !categoryId) {
-//       return res.status(400).json({ 
-//         success: false, 
-//         error: 'userId and categoryId are required' 
-//       });
-//     }
-    
-//     const result = await pool.query(
-//       'INSERT INTO category_to_user (user_id, category_id) VALUES ($1, $2) RETURNING *',
-//       [userId, categoryId]
-//     );
-    
-//     res.status(201).json({ 
-//       success: true, 
-//       data: result.rows[0] 
-//     });
-//   } catch (error) {
-//     console.error('Error adding category to user:', error);
-//     res.status(500).json({ 
-//       success: false, 
-//       error: error.message 
-//     });
-//   }
-// };
-
-// // Добавить навык пользователю
-// const addSkillToUser = async (req, res) => {
-//   try {
-//     const { userId, skillId } = req.body;
-    
-//     if (!userId || !skillId) {
-//       return res.status(400).json({ 
-//         success: false, 
-//         error: 'userId and skillId are required' 
-//       });
-//     }
-    
-//     const result = await pool.query(
-//       'INSERT INTO skill_to_user (user_id, skill_id) VALUES ($1, $2) RETURNING *',
-//       [userId, skillId]
-//     );
-    
-//     res.status(201).json({ 
-//       success: true, 
-//       data: result.rows[0] 
-//     });
-//   } catch (error) {
-//     console.error('Error adding skill to user:', error);
-//     res.status(500).json({ 
-//       success: false, 
-//       error: error.message 
-//     });
-//   }
-// };
-
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
   deleteUser,
-  //addCategoryToUser,
-  //addSkillToUser
 };
